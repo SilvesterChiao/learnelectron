@@ -1,0 +1,14 @@
+{
+  "name": "learnelectron",
+  "version": "1.0.0",
+  "description": "<!--  * @Author: SilvesterChiao  * @Date: 2020-06-08 14:19:41  * @LastEditors: SilvesterChiao  * @LastEditTime: 2020-06-08 14:22:24 -->",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "SilvesterChiao",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.0"
+  }
+}
