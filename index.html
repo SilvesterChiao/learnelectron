@@ -2,7 +2,7 @@
  * @Author: SilvesterChiao
  * @Date: 2020-06-11 10:51:22
  * @LastEditors: SilvesterChiao
- * @LastEditTime: 2020-06-11 10:51:33
+ * @LastEditTime: 2020-08-24 10:32:14
 -->
 
 <!DOCTYPE html>
@@ -12,6 +12,11 @@
     <title>Hello Electron!</title>
   </head>
   <body>
-    <h1>Hello Electron!</h1> 
+    <h1>Hello Electron!</h1>
+    <p id="message"></p>
+    <button id="btn">点击</button>
+    <script>
+      require('./renderer.js')
+    </script>
   </body>
 </html>
