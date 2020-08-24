@@ -2,33 +2,71 @@
  * @Author: SilvesterChiao
  * @Date: 2020-06-11 10:44:45
  * @LastEditors: SilvesterChiao
- * @LastEditTime: 2020-08-24 10:31:53
+ * @LastEditTime: 2020-08-24 21:50:07
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const DataStore = require('./MusicDataStore')
 
-app.on('ready', () => {
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-        }
-    })
-    mainWindow.loadFile('index.html')
-    ipcMain.on('message', (event, arg) => {
-        // event.sender.send('reply', 'hello from main')
-        mainWindow.send('reply', 'hello from mainWindow')
-    })
-    ipcMain.on('open', () => {
-        const secondWindow = new BrowserWindow({
-            width: 400,
-            height: 300,
+const myStore = new DataStore({
+    name: 'Music Data',
+
+})
+class AppWindow extends BrowserWindow {
+    constructor(config, fileLocation) {
+        const basicConfig = {
+            width: 800,
+            height: 600,
             webPreferences: {
                 nodeIntegration: true,
-            },
-            parent: mainWindow,
+            }
+        }
+        // const finalConfig = Object.assign(basicConfig, config);
+        const finalConfig = { ...basicConfig, ...config }
+        super(finalConfig)
+        this.loadFile(fileLocation)
+        this.once('ready-to-show', () => {
+            this.show()
         })
-        secondWindow.loadFile('second.html')
+    }
+}
+
+app.on('ready', () => {
+    const mainWindow = new AppWindow({}, './renderer/home/home.html')
+    ipcMain.on('add-music-window', () => {
+        const addWindow = new AppWindow({
+            width: 500,
+            height: 400,
+            parent: mainWindow,
+        }, './renderer/add/add.html')
     })
+    ipcMain.on('add-tracks', (event, tracks) => {
+        const updatedTracks = myStore.addTracks(tracks).getTracks();
+        console.log(updatedTracks)
+    })
+    ipcMain.on('open-music-file', (event) => {
+        dialog.showOpenDialog({
+            properties: ['openFile', 'multiSelections'],
+            filters: [{ name: 'Music', extensions: ['mp3'] }]
+        }).then(result => {
+            if (result) {
+                event.sender.send('selected-file', result)
+            }
+        })
+    })
+    // ipcMain.on('message', (event, arg) => {
+    //     // event.sender.send('reply', 'hello from main')
+    //     mainWindow.send('reply', 'hello from mainWindow')
+    // })
+    // ipcMain.on('open', () => {
+    //     const secondWindow = new BrowserWindow({
+    //         width: 400,
+    //         height: 300,
+    //         webPreferences: {
+    //             nodeIntegration: true,
+    //         },
+    //         parent: mainWindow,
+    //     })
+    //     secondWindow.loadFile('second.html')
+    // })
 })

@@ -22,18 +22,31 @@
 ## 打包
 
 1. electron-builder
-
+```bash
 npm install electron-builder --save-dev
-
-1. electron-packager
-
+```
+2. electron-packager
+```bash
 npm install electron-packager --save-dev
-
+```
 ## 基础
 
-1. 进程, 主进程, 渲染进程
-1. BrowserWindow
-1. IPC(ipcRenderer, ipcMain): 进程之间通信
+### 进程, 主进程, 渲染进程
+
+### BrowserWindow
+
+1. 参数
+1. setMenu
+1. loadURL
+1. loadFile
+
+### IPC(ipcRenderer, ipcMain): 进程之间通信
+
+1. ipcMain
+  - on
+1. ipcRenderer
+  - send
+  - on
 
 ## 参考文档
 
