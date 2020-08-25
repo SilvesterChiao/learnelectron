@@ -2,7 +2,7 @@
  * @Author: SilvesterChiao
  * @Date: 2020-06-11 10:44:45
  * @LastEditors: SilvesterChiao
- * @LastEditTime: 2020-08-24 21:50:07
+ * @LastEditTime: 2020-08-25 16:17:22
  */
 
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
@@ -33,6 +33,10 @@ class AppWindow extends BrowserWindow {
 
 app.on('ready', () => {
     const mainWindow = new AppWindow({}, './renderer/home/home.html')
+    mainWindow.webContents.on('did-finish-load', () => {
+        console.log('page did finish load')
+        mainWindow.send('getTracks', myStore.getTracks())
+    })
     ipcMain.on('add-music-window', () => {
         const addWindow = new AppWindow({
             width: 500,
@@ -42,7 +46,7 @@ app.on('ready', () => {
     })
     ipcMain.on('add-tracks', (event, tracks) => {
         const updatedTracks = myStore.addTracks(tracks).getTracks();
-        console.log(updatedTracks)
+        mainWindow.send('getTracks', updatedTracks)
     })
     ipcMain.on('open-music-file', (event) => {
         dialog.showOpenDialog({
@@ -53,6 +57,10 @@ app.on('ready', () => {
                 event.sender.send('selected-file', result)
             }
         })
+    })
+    ipcMain.on('delete-track', (event, id) => {
+        const updatedTracks = myStore.deleteTrack(id).getTracks()
+        mainWindow.send('getTracks', updatedTracks)
     })
     // ipcMain.on('message', (event, arg) => {
     //     // event.sender.send('reply', 'hello from main')
