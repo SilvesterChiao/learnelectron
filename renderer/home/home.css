@@ -2,3 +2,11 @@
   cursor: pointer;
   color: #007bff;
 }
+
+.progress {
+  height: 1px;
+}
+
+.progress-bar {
+  height: 1px;
+}

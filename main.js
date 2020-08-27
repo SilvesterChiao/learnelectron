@@ -2,7 +2,7 @@
  * @Author: SilvesterChiao
  * @Date: 2020-06-11 10:44:45
  * @LastEditors: SilvesterChiao
- * @LastEditTime: 2020-08-25 16:17:22
+ * @LastEditTime: 2020-08-26 13:46:00
  */
 
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
@@ -34,7 +34,6 @@ class AppWindow extends BrowserWindow {
 app.on('ready', () => {
     const mainWindow = new AppWindow({}, './renderer/home/home.html')
     mainWindow.webContents.on('did-finish-load', () => {
-        console.log('page did finish load')
         mainWindow.send('getTracks', myStore.getTracks())
     })
     ipcMain.on('add-music-window', () => {
