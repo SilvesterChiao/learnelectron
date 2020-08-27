@@ -25,6 +25,7 @@
 ```bash
 npm install electron-builder --save-dev
 ```
+
 2. electron-packager
 ```bash
 npm install electron-packager --save-dev
@@ -51,4 +52,4 @@ npm install electron-packager --save-dev
 ## 参考文档
 
 1. [Electron入门教程一（electron的基础安装等）](https://blog.csdn.net/hhy1006894859/article/details/89400803)
-1. []()
+1. [zulip-electron](https://github.com/zulip-electron)
