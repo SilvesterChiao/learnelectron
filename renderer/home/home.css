@@ -1,3 +1,38 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #1d1d1d;
+  color: #dedfdf;
+}
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.main-header {
+  padding: 10px;
+}
+.main-header ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.main-header ul li {
+  list-style: none;
+  padding: 0 10px;
+  border-right: 1px solid #fff;
+}
+.main-header ul li.active {
+  border-radius: 8px;
+  background-color: #1c87fb;
+}
+.main-item {
+  display: none;
+  flex: 1;
+}
+
+.player-wrapper {}
+
 #tracksList .col-2 .fa:hover {
   cursor: pointer;
   color: #007bff;

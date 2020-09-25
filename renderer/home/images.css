@@ -1,0 +1,25 @@
+.image-player-wrapper {
+  display: block;
+  position: relative;
+}
+.image-player-wrapper img {
+  width: 100%;
+}
+.pre {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+}
+.pre:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.next {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

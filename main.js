@@ -2,10 +2,10 @@
  * @Author: SilvesterChiao
  * @Date: 2020-06-11 10:44:45
  * @LastEditors: SilvesterChiao
- * @LastEditTime: 2020-08-26 13:46:00
+ * @LastEditTime: 2020-09-18 17:41:12
  */
 
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, screen } = require('electron')
 const DataStore = require('./MusicDataStore')
 
 const myStore = new DataStore({
@@ -15,8 +15,11 @@ const myStore = new DataStore({
 class AppWindow extends BrowserWindow {
     constructor(config, fileLocation) {
         const basicConfig = {
-            width: 800,
-            height: 600,
+            x: screen.getPrimaryDisplay().workAreaSize.width - 480,
+            y: 0,
+            width: 480,
+            height: screen.getPrimaryDisplay().workAreaSize.height, 
+            darkTheme: true,
             webPreferences: {
                 nodeIntegration: true,
             }
