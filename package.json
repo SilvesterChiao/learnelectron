@@ -49,7 +49,7 @@
     }
   },
   "devDependencies": {
-    "electron": "^9.0.0",
+    "electron": "^11.5.0",
     "electron-builder": "^22.8.0",
     "electronmon": "^1.1.2",
     "nodemon": "^2.0.4"
