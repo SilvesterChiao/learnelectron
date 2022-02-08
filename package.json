@@ -1,63 +1,63 @@
 {
-  "name": "learnelectron",
-  "version": "1.0.0",
-  "description": "<!--  * @Author: SilvesterChiao  * @Date: 2020-06-08 14:19:41  * @LastEditors: SilvesterChiao  * @LastEditTime: 2020-06-08 14:22:24 -->",
-  "main": "main.js",
-  "author": "SilvesterChiao",
-  "license": "ISC",
-  "scripts": {
-    "dev": "nodemon --watch --exec electron .",
-    "start": "electronmon .",
-    "build": "electron-builder"
-  },
-  "build": {
-    "appId": "simpleMusicPlayer",
-    "mac": {
-      "category": "public.app-category.productivity"
+    "name": "learnelectron",
+    "version": "1.0.0",
+    "description": "<!--  * @Author: SilvesterChiao  * @Date: 2020-06-08 14:19:41  * @LastEditors: SilvesterChiao  * @LastEditTime: 2020-06-08 14:22:24 -->",
+    "main": "main.js",
+    "author": "SilvesterChiao",
+    "license": "ISC",
+    "scripts": {
+        "dev": "nodemon --watch --exec electron .",
+        "start": "electronmon .",
+        "build": "electron-builder"
     },
-    "dmg": {
-      "background": "build/appdmg.png",
-      "icon": "build/icon.icns",
-      "iconSize": "100",
-      "contents": [
-        {
-          "x": 380,
-          "y": 280,
-          "type": "link",
-          "path": "/Applications"
+    "build": {
+        "appId": "simpleMusicPlayer",
+        "mac": {
+            "category": "public.app-category.productivity"
         },
-        {
-          "x": 110,
-          "y": 280,
-          "type": "file"
+        "dmg": {
+            "background": "build/appdmg.png",
+            "icon": "build/icon.icns",
+            "iconSize": "100",
+            "contents": [
+                {
+                    "x": 380,
+                    "y": 280,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 110,
+                    "y": 280,
+                    "type": "file"
+                }
+            ],
+            "window": {
+                "width": 500,
+                "height": 500
+            }
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ]
+        },
+        "win": {
+            "target": "squirrel",
+            "icon": "build/icon.ico"
         }
-      ],
-      "window": {
-        "width": 500,
-        "height": 500
-      }
     },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
+    "devDependencies": {
+        "electron": "^17.0.0",
+        "electron-builder": "^22.8.0",
+        "electronmon": "^1.1.2",
+        "nodemon": "^2.0.4"
     },
-    "win": {
-      "target": "squirrel",
-      "icon": "build/icon.ico"
+    "dependencies": {
+        "bootstrap": "^4.5.2",
+        "electron-store": "^6.0.0",
+        "font-awesome": "^4.7.0",
+        "uuid": "^8.3.0"
     }
-  },
-  "devDependencies": {
-    "electron": "^9.0.0",
-    "electron-builder": "^22.8.0",
-    "electronmon": "^1.1.2",
-    "nodemon": "^2.0.4"
-  },
-  "dependencies": {
-    "bootstrap": "^4.5.2",
-    "electron-store": "^6.0.0",
-    "font-awesome": "^4.7.0",
-    "uuid": "^8.3.0"
-  }
 }

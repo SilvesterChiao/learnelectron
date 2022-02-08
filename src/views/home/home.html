@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Electron 音乐播放器</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../node_modules/font-awesome/fonts/FontAwesome.otf">
+    <link rel="stylesheet" href="./home.css">
+    <link rel="stylesheet" href="./todolist.css">
+    <link rel="stylesheet" href="./images.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="side-bar">
+            <div id="todo" class="side-item">T</div>
+            <div id="image" class="side-item side-item-active">I</div>
+            <div id="music" class="side-item">M</div>
+        </div>
+        <div class="main-wrapper" id="main-wrapper">
+            <div class="todolist-wrapper main-item" id="todolist-wrapper">
+                <h3 class="todolist-title">
+                    Todo List
+                    <span class="todolist-total" id="todolist-add">3</span>
+                </h3>
+                <div class="todolist-type-wrapper">
+                    <ul class="todolist-type-list">
+                        <li id="todolist-type-all">全部</li>
+                        <li id="todolist-type-todo">进行中</li>
+                        <li id="todolist-type-done">已完成</li>
+                    </ul>
+                    <div class="todolist-action-wrapper">
+                        <div class="todolist-action" id="btn-todo-clear">清空</div>
+                    </div>
+                </div>
+                <div class="todolist-add-wrapper" id="todolist-add-wrapper">
+                    <input type="text" id="todolist-add-input">
+                </div>
+                <div class="todolist" id="todolist">
+
+                </div>
+            </div>
+            <div class="image-wrapper main-item" id="image-wrapper">
+                <div class="pre" id="pre"></div>
+                <img id="img" src="../../assets/images/xinyuanjieyi_1.jpg" alt="">
+                <div class="next" id="next"></div>
+            </div>
+            <div class="player-wrapper main-item" id="player-wrapper">
+                <div class="container mt-4">
+                    <h1>我的播放器</h1>
+                    <button
+                        class="btn btn-primary btn-lg btn-block mt-4"
+                        id="add-music-button"
+                        type="button"
+                    >
+                        添加音乐到曲库
+                    </button>
+                    <div id="tracksList" class="mt-4"></div>
+                </div>
+                <div class="container fixed-bottom bg-white pb-4">
+                    <hr />
+                    <div class="row my-2" id="player-status"></div>
+                    <div class="progress">
+                        <div
+                            class="progress-bar bg-success"
+                            id="player-progress"
+                            role="progressbar"
+                            style="width: 0%;"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require('./home.js')
+        require('./todolist.js')
+        require('./images.js')
+        require('./music.js')
+    </script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@
  */
 
 const { app, BrowserWindow, ipcMain, dialog, screen } = require('electron')
-const DataStore = require('./MusicDataStore')
+const DataStore = require('./src/stores/MusicDataStore')
 
 const myStore = new DataStore({
     name: 'Music Data',
@@ -15,13 +15,12 @@ const myStore = new DataStore({
 class AppWindow extends BrowserWindow {
     constructor(config, fileLocation) {
         const basicConfig = {
-            x: screen.getPrimaryDisplay().workAreaSize.width - 480,
-            y: 0,
-            width: 480,
+            width: screen.getPrimaryDisplay().workAreaSize.width,
             height: screen.getPrimaryDisplay().workAreaSize.height, 
             darkTheme: true,
             webPreferences: {
                 nodeIntegration: true,
+                contextIsolation: false,
             }
         }
         // const finalConfig = Object.assign(basicConfig, config);
@@ -35,7 +34,10 @@ class AppWindow extends BrowserWindow {
 }
 
 app.on('ready', () => {
-    const mainWindow = new AppWindow({}, './renderer/home/home.html')
+    const mainWindow = new AppWindow({
+        skipTaskBar: false,
+    }, './src/views/home/home.html')
+    mainWindow.maximize();
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.send('getTracks', myStore.getTracks())
     })
@@ -43,8 +45,9 @@ app.on('ready', () => {
         const addWindow = new AppWindow({
             width: 500,
             height: 400,
+            frame: false,
             parent: mainWindow,
-        }, './renderer/add/add.html')
+        }, './src/views/add/add.html')
     })
     ipcMain.on('add-tracks', (event, tracks) => {
         const updatedTracks = myStore.addTracks(tracks).getTracks();
@@ -64,19 +67,20 @@ app.on('ready', () => {
         const updatedTracks = myStore.deleteTrack(id).getTracks()
         mainWindow.send('getTracks', updatedTracks)
     })
-    // ipcMain.on('message', (event, arg) => {
-    //     // event.sender.send('reply', 'hello from main')
-    //     mainWindow.send('reply', 'hello from mainWindow')
-    // })
-    // ipcMain.on('open', () => {
-    //     const secondWindow = new BrowserWindow({
-    //         width: 400,
-    //         height: 300,
-    //         webPreferences: {
-    //             nodeIntegration: true,
-    //         },
-    //         parent: mainWindow,
-    //     })
-    //     secondWindow.loadFile('second.html')
-    // })
+    ipcMain.on('message', (event, arg) => {
+        // event.sender.send('reply', 'hello from main')
+        mainWindow.send('reply', 'hello from mainWindow')
+    })
+    ipcMain.on('open', () => {
+        const secondWindow = new BrowserWindow({
+            width: 400,
+            height: 300,
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+            },
+            parent: mainWindow,
+        })
+        secondWindow.loadFile('./src/views/second/second.html')
+    })
 })

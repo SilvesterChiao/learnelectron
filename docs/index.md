@@ -44,10 +44,10 @@ npm install electron-packager --save-dev
 ### IPC(ipcRenderer, ipcMain): 进程之间通信
 
 1. ipcMain
-  - on
+   - on
 1. ipcRenderer
-  - send
-  - on
+   - send
+   - on
 
 ## 参考文档
 
